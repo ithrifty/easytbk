@@ -1,23 +1,49 @@
 <?php
+
+/*
+ * This file is part of the overtrue/wechat.
+ *
+ * (c) overtrue <i@overtrue.me>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace EasyTBK;
 
 /**
  * Class Factory.
  *
- * @method TaoBao taobao()
- * @method PinDuoDuo pinduoduo()
- * @method JingDong jingdong()
- * @method Vip vip()
- * @method SuNing suning()
+ * @method static \EasyWeChat\Payment\Application            payment(array $config)
+ * @method static \EasyWeChat\MiniProgram\Application        miniProgram(array $config)
+ * @method static \EasyWeChat\OpenPlatform\Application       openPlatform(array $config)
+ * @method static \EasyWeChat\OfficialAccount\Application    officialAccount(array $config)
+ * @method static \EasyWeChat\BasicService\Application       basicService(array $config)
+ * @method static \EasyWeChat\Work\Application               work(array $config)
+ * @method static \EasyWeChat\OpenWork\Application           openWork(array $config)
+ * @method static \EasyWeChat\MicroMerchant\Application      microMerchant(array $config)
  */
 class Factory
 {
+    /**
+     * @param string $name
+     * @param array  $config
+     *
+     * @return \EasyWeChat\Kernel\ServiceContainer
+     */
+    public static function make($name, array $config)
+    {
+        $namespace = Kernel\Support\Str::studly($name);
+        $application = "\\EasyTBK\\{$namespace}\\Application";
+
+        return new $application($config);
+    }
 
     /**
      * Dynamically pass methods to the application.
      *
      * @param string $name
-     * @param array $arguments
+     * @param array  $arguments
      *
      * @return mixed
      */
@@ -25,22 +51,4 @@ class Factory
     {
         return self::make($name, ...$arguments);
     }
-
-
-    /**
-     * @param $name
-     * @param array $config
-     * @return mixed
-     */
-    public function make($name, array $config = [])
-    {
-        $namespace = Kernel\Support\Str::studly($name);
-        $application = "\\EasyTBK\\{$namespace}\\Application";
-        return new $application($config);
-    }
-
-
-
-
-
 }

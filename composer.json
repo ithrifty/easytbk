@@ -12,19 +12,11 @@
         }
     ],
     "require": {
-        "php": ">=7.0.0",
-        "hanson/foundation-sdk": ">=5.0.0"
+        "php": ">=7.0.0"
     },
     "autoload": {
         "psr-4": {
             "EasyTBK\\": "src/"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Ithrifty\\EasyTBK\\ServiceProvider"
-            ]
         }
     }
 }
