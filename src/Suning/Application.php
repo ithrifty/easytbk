@@ -52,7 +52,13 @@ class Application extends ServiceContainer
     protected $providers = [
         Goods\ServiceProvider::class,
         Category\ServiceProvider::class,
-        //Order\ServiceProvider::class,
+        Promotion\ServiceProvider::class,
+        Coupon\ServiceProvider::class,
+        Activity\ServiceProvider::class,
+        Juin\ServiceProvider::class,
+        Order\ServiceProvider::class,
+        User\ServiceProvider::class,
+        Twitter\ServiceProvider::class,
     ];
 
 

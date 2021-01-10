@@ -20,26 +20,6 @@ use EasyTBK\Kernel\BaseClient;
  */
 class Client extends BaseClient
 {
-
-    /**
-     * 微博商品信息查询和转链
-     * @url https://open.suning.com/ospos/apipage/toApiMethodDetailMenuNew.do?interCode=suning.netalliance.weiboproductinfo.get
-     * @return array|\EasyTBK\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
-     * @throws \EasyTBK\Kernel\Exceptions\InvalidConfigException
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    public function weiboProductInfo(string $detailUrl) {
-        $this->app->config->AppMethod = 'suning.netalliance.weiboproductinfo.get';
-        $this->app->config->ReqMethod = 'getWeiboproductinfo';
-        $param['detailUrl'] = $detailUrl;
-        $param['isGetBuyUrl'] = '';
-        $param['isShare'] = '';
-        $param['subUser'] = '';
-        $param['wbShareId'] = '';
-        $param['custNum'] = '';
-        return $this->httpPost('/api/http/sopRequest/suning.netalliance.weiboproductinfo.get', $param);
-    }
-
     /**
      * 获取吊起链接接口
      * @url https://open.suning.com/ospos/apipage/toApiMethodDetailMenuNew.do?interCode=suning.netalliance.hoistinglink.query
@@ -58,6 +38,26 @@ class Client extends BaseClient
         $param['mertCode'] = $mertCode;
         $param['adBookId'] = $adBookId;
         return $this->httpPost('/api/http/sopRequest/suning.netalliance.hoistinglink.query', $param);
+    }
+
+
+    /**
+     * 微博商品信息查询和转链
+     * @url https://open.suning.com/ospos/apipage/toApiMethodDetailMenuNew.do?interCode=suning.netalliance.weiboproductinfo.get
+     * @return array|\EasyTBK\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
+     * @throws \EasyTBK\Kernel\Exceptions\InvalidConfigException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function weiboProductInfo(string $detailUrl) {
+        $this->app->config->AppMethod = 'suning.netalliance.weiboproductinfo.get';
+        $this->app->config->ReqMethod = 'getWeiboproductinfo';
+        $param['detailUrl'] = $detailUrl;
+        $param['isGetBuyUrl'] = '';
+        $param['isShare'] = '';
+        $param['subUser'] = '';
+        $param['wbShareId'] = '';
+        $param['custNum'] = '';
+        return $this->httpPost('/api/http/sopRequest/suning.netalliance.weiboproductinfo.get', $param);
     }
 
     /**
