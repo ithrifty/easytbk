@@ -2,7 +2,7 @@
 淘宝联盟(大淘客)、京东联盟、多多进宝、苏宁推客SDK封装，该项目长期维护，如发现问题，请提交PR。
 
 # 联系方式
-QQ 515343908
+暂无
 
 # 安装
 1、通过 composer 安装扩展包
@@ -11,7 +11,7 @@ QQ 515343908
 composer require niugengyun/easytbk
 ```
 
-# 参数配置
+## 参数
 ```
 <?php
 return [
@@ -40,7 +40,7 @@ return [
 ```
 
 
-# 初始化SDK
+## 初始化SDK
 每个平台SDK的具体调用方法参考各平台的文档
 
 1、淘宝SDK初始化
@@ -75,5 +75,14 @@ use EasyTBK\Factory;
 $client = Factory::suning(config['suning']);
 ```
 
-### 参数调用
-请具体参考插件包
+## 示例
+### 京东调用猜你喜欢
+```
+<?php
+use EasyTBK\Factory;
+$jd = Factory::jingdong(config('jd'));
+$response = $jd->goods->material([
+    'eliteId' => 1,
+]);
+return $response;
+```
