@@ -66,10 +66,10 @@ class Application extends ServiceContainer
         $art = $method == 'GET' ? 'query' : 'form_params';
         // 苏宁坑爹的 header 组装
         $options['headers'] = [
-            'AppSecret' => $this->userConfig['AppSecret'],
+            'AppSecret' => $this->userConfig['app_secret'],
             'AppMethod' => $this->config->AppMethod,
             'AppRequestTime' => date('Y-m-d H:i:s', time()),
-            'AppKey' => $this->userConfig['AppKey'],
+            'AppKey' => $this->userConfig['app_key'],
             'VersionNo' => 'v1.2',
         ];
         $post_field = [
@@ -81,7 +81,7 @@ class Application extends ServiceContainer
         ];
         $options['headers']['post_field'] = base64_encode(json_encode($post_field));
         $options['headers']['signInfo'] = $this->getSignature($options['headers']);
-        unset($options['headers']['post_field'], $options['headers']['appSecret'], $options[$art]);
+        unset($options['headers']['post_field'], $options['headers']['app_secret'], $options[$art]);
         $options['headers']['Format'] = 'json';
         $options['json'] = $post_field;
         return $options;
