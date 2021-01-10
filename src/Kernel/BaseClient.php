@@ -62,7 +62,7 @@ class BaseClient
      * @param string $url
      * @param array  $query
      *
-     * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
+     * @return \Psr\Http\Message\ResponseInterface|\EasyTBK\Kernel\Support\Collection|array|object|string
      *
      * @throws \EasyTBK\Kernel\Exceptions\InvalidConfigException
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -78,7 +78,7 @@ class BaseClient
      * @param string $url
      * @param array  $data
      *
-     * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
+     * @return \Psr\Http\Message\ResponseInterface|\EasyTBK\Kernel\Support\Collection|array|object|string
      *
      * @throws \EasyTBK\Kernel\Exceptions\InvalidConfigException
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -95,7 +95,7 @@ class BaseClient
      * @param array  $data
      * @param array  $query
      *
-     * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
+     * @return \Psr\Http\Message\ResponseInterface|\EasyTBK\Kernel\Support\Collection|array|object|string
      *
      * @throws \EasyTBK\Kernel\Exceptions\InvalidConfigException
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -113,7 +113,7 @@ class BaseClient
      * @param array  $form
      * @param array  $query
      *
-     * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
+     * @return \Psr\Http\Message\ResponseInterface|\EasyTBK\Kernel\Support\Collection|array|object|string
      *
      * @throws \EasyTBK\Kernel\Exceptions\InvalidConfigException
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -165,7 +165,7 @@ class BaseClient
      * @param array  $options
      * @param bool   $returnRaw
      *
-     * @return \Psr\Http\Message\ResponseInterface|\EasyWeChat\Kernel\Support\Collection|array|object|string
+     * @return \Psr\Http\Message\ResponseInterface|\EasyTBK\Kernel\Support\Collection|array|object|string
      *
      * @throws \EasyTBK\Kernel\Exceptions\InvalidConfigException
      * @throws \GuzzleHttp\Exception\GuzzleException

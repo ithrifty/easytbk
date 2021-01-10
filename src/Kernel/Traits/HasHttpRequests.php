@@ -147,7 +147,6 @@ trait HasHttpRequests
         $options = array_merge(self::$defaults, $options, ['handler' => $this->getHandlerStack()]);
 
         $options = $this->fixJsonIssue($options);
-
         if (property_exists($this, 'baseUri') && !is_null($this->baseUri)) {
             $options['base_uri'] = $this->baseUri;
         }
@@ -206,7 +205,6 @@ trait HasHttpRequests
 
             unset($options['json']);
         }
-
         return $options;
     }
 
