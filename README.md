@@ -32,8 +32,8 @@ return [
         'response_type' => 'raw',
     ],
     'suning' => [
-        'AppKey' => '78f10d46bee670023ff551c14e484683',
-        'AppSecret' => '3436a382f7cdeb603da1d4f26f8c6c01',
+        'app_key' => '78f10d46bee670023ff551c14e484683',
+        'app_secret' => '3436a382f7cdeb603da1d4f26f8c6c01',
         'response_type' => 'raw',
     ],
 ];
