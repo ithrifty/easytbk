@@ -8,7 +8,7 @@
 1、通过 composer 安装扩展包
 
 ```bash
-composer require niugengyun/easytbk
+composer require ithrifty/easytbk
 ```
 
 ## 参数
