@@ -1,38 +1,44 @@
 # 介绍
-
-这个SDK只支持laravel！
-
-这个SDK只支持laravel！
-
-这个SDK只支持laravel！
-
-这个SDK只支持laravel！
-
-这个SDK只支持laravel！
-
-这个SDK只支持laravel！
-
-
-淘宝联盟、京东联盟、多多进宝、唯品客、苏宁推客SDK封装，该项目长期维护，如发现问题，请提交PR。
+淘宝联盟(大淘客)、京东联盟、多多进宝、苏宁推客SDK封装，该项目长期维护，如发现问题，请提交PR。
 
 # 联系方式
-
 QQ 515343908
 
-
 # 安装
-1、安装扩展包，该扩展包只支持laravel
+1、通过 composer 安装扩展包
 
 ```bash
 composer require niugengyun/easytbk
 ```
 
-
-2、执行下面的命令，然后修改config/easytbk.php
-
-```bash
-php artisan vendor:publish --provider "NiuGengYun\EasyTBK\ServiceProvider"
+# 参数配置
 ```
+<?php
+return [
+    // 大淘客
+    'tbk' => [
+        'app_key' => '5fda0d0712856',
+        'app_secret' => 'f1ee1a9e3f821529d8816b957c9426d9',
+        'response_type' => 'raw',
+    ],
+    'jd' => [
+        'app_key' => 'e12dc1bdbcd219e02f6edd4323b0078f',
+        'app_secret' => 'a1a814e2944042f6ab883538ef4aeae9',
+        'response_type' => 'raw',
+    ],
+    'pdd' => [
+        'client_id' => '9fe2a081a6da4eb0b7b8840cce9f085e',
+        'client_secret' => '4c9d3acc3289ed6d45b91e023868935f28b9b837',
+        'response_type' => 'raw',
+    ],
+    'suning' => [
+        'AppKey' => '78f10d46bee670023ff551c14e484683',
+        'AppSecret' => '3436a382f7cdeb603da1d4f26f8c6c01',
+        'response_type' => 'raw',
+    ],
+];
+```
+
 
 # 初始化SDK
 每个平台SDK的具体调用方法参考各平台的文档
@@ -41,68 +47,33 @@ php artisan vendor:publish --provider "NiuGengYun\EasyTBK\ServiceProvider"
 
 ```php
 <?php
-use NiuGengYun\EasyTBK\Factory;
-use NiuGengYun\EasyTBK\TaoBao\Request\TbkItemInfoGetRequest;
-
-$client = Factory::taobao ();
-$req = new TbkItemInfoGetRequest;
-$req->setNumIids ($numIids);
-return $client->execute ($req);
+use EasyTBK\Factory;
+$client = Factory::taobao(config['tbk']);
 ```
 
 2、京东SDK初始化
 ```php
 <?php
-use NiuGengYun\EasyTBK\Factory;
-use NiuGengYun\EasyTBK\JingDong\Request\JdUnionGoodsPromotiongoodsinfoQueryRequest;
+use EasyTBK\Factory;
 
-$jd = Factory::jingdong();
-$req = new JdUnionGoodsPromotiongoodsinfoQueryRequest();
-$req->setSkuIds("$itemid");
-return $jd->execute($req);
+$client = Factory::jingdong(config['jd']);
 ```
 
 3、拼多多SDK初始化
 ```php
 <?php
-use NiuGengYun\EasyTBK\Factory;
-use NiuGengYun\EasyTBK\PinDuoDuo\Request\DdkGoodsDetailRequest;
+use EasyTBK\Factory;
 
-$pdd = Factory::pinduoduo();
-$req = new DdkGoodsDetailRequest();
-$req->setGoodsIdList("[$itemid]");
-return  $pdd->execute($req);
-```
-
-4、唯品会SDK初始化
-```php
-<?php
-use NiuGengYun\EasyTBK\Factory;
-use NiuGengYun\EasyTBK\Vip\Request\PidGenRequest;
-use NiuGengYun\EasyTBK\Vip\Request\UnionPidServiceClient;
-
-// 唯品会官方的sdk写的比较垃圾，用法和其他平台稍微不一样
-$service= UnionPidServiceClient::getService();
-Factory::vip();
-$pidGenRequest1 = new PidGenRequest();
-$pidNameList2 = array();
-$pidNameList2[0] = "value";
-$pidGenRequest1->pidNameList = $pidNameList2;
-$pidGenRequest1->requestId = "requestId";
-dd($service->genPidWithOauth($pidGenRequest1));
+$client = Factory::pinduoduo(config['pdd']);
 ```
 
 5、苏宁连联盟SDK初始化
 ```php
 <?php
-use NiuGengYun\EasyTBK\Factory;
-use NiuGengYun\EasyTBK\SuNing\Request\Netalliance\CouponproductQueryRequest;
+use EasyTBK\Factory;
 
-$c = Factory::suning();
-$req = new CouponproductQueryRequest();
-$req->setPageNo("1");
-$req->setPageSize("10");
-$req->setPositionId("12");
-$resp = $c->execute($req);
-dd($resp);
+$client = Factory::suning(config['suning']);
 ```
+
+### 参数调用
+请具体参考插件包
