@@ -1,14 +1,4 @@
 <?php
-
-/*
- * This file is part of the overtrue/wechat.
- *
- * (c) overtrue <i@overtrue.me>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 namespace EasyTBK\Pinduoduo;
 
 use EasyTBK\BasicService;
@@ -19,16 +9,16 @@ use EasyTBK\Kernel\ServiceContainer;
  *
  * @author overtrue <i@overtrue.me>
  *
- * @property Goods\Client                     $goods
- * @property Category\Client                     $category
- * @property Coupon\Client                     $coupon
- * @property Gift\Client                     $gift
- * @property Activity\Client                     $activity
- * @property Promotion\Client                     $promotion
- * @property Order\Client                     $order
- * @property Statistics\Client                     $statistics
- * @property User\Client                     $user
- * @property Position\Client                     $position
+ * @property Goods\Client       $goods
+ * @property Category\Client    $category
+ * @property Coupon\Client      $coupon
+ * @property Gift\Client        $gift
+ * @property Activity\Client    $activity
+ * @property Promotion\Client   $promotion
+ * @property Order\Client       $order
+ * @property Statistics\Client  $statistics
+ * @property User\Client        $user
+ * @property Position\Client    $position
  */
 class Application extends ServiceContainer
 {
