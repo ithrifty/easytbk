@@ -1,7 +1,7 @@
 <?php
 namespace EasyTBK\Pinduoduo;
-
 use EasyTBK\BasicService;
+use EasyTBK\Kernel\Exceptions\RuntimeException;
 use EasyTBK\Kernel\ServiceContainer;
 
 /**
@@ -48,13 +48,15 @@ class Application extends ServiceContainer
 
     public function getOptions($options, $method = 'GET') {
         $art = $method == 'GET' ? 'query' : 'form_params';
-        $options[$art] = [
+        $options[$art] = $this->paramsHandle($options[$art]);
+        $opts = [
             'client_id' => $this->userConfig['client_id'],
             'type' => $options[$art]['type'],
             'timestamp' => time(),
             'data_type' => 'JSON',
             'version' => 'V1',
         ];
+        $options[$art] = array_merge($opts, $options[$art]);
         $options[$art]['sign'] = $this->getSignature($options[$art]);
         return $options;
     }
@@ -70,5 +72,30 @@ class Application extends ServiceContainer
         $str = $this->userConfig['client_secret'] . $str . $this->userConfig['client_secret'];
         $signature = strtoupper(md5($str));
         return $signature;
+    }
+
+    public function response($response) {
+        if(array_key_exists('error_response', $response)) {
+            throw new \RuntimeException($response['error_response']['sub_msg']);
+        }
+        return current($response);
+    }
+
+    /**
+     * 参数预处理
+     * @param array $params
+     * @return array
+     */
+    protected function paramsHandle(array $params)
+    {
+        array_walk($params, function (&$item) {
+            if (is_array($item)) {
+                $item = json_encode($item);
+            }
+            if (is_bool($item)) {
+                $item = ['false', 'true'][intval($item)];
+            }
+        });
+        return $params;
     }
 }

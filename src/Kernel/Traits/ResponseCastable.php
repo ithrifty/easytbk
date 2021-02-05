@@ -84,9 +84,6 @@ trait ResponseCastable
             case is_scalar($response):
                 $response = new Response(200, [], (string) $response);
                 break;
-//            case 'json':
-//                $response = new Response(200, [], json_decode($response, true));
-//                break;
             default:
                 throw new InvalidArgumentException(sprintf('Unsupported response type "%s"', gettype($response)));
         }

@@ -68,6 +68,7 @@ class Client extends BaseClient
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getPrivilegeLink(int $goodsId, array $param = []) {
+        $param['version'] = 'v1.3.1';
         $param['goodsId'] = $goodsId;
         return $this->httpGet('/api/tb-service/get-privilege-link', $param);
     }
@@ -86,13 +87,13 @@ class Client extends BaseClient
     }
 
     /**
-     * 商品列表
+     * 商品详情
      * @url http://www.dataoke.com/kfpt/api-d.html?id=8
      * @return array|\EasyTBK\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      * @throws \EasyTBK\Kernel\Exceptions\InvalidConfigException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getGoodsDetails(int $id = null, int $goodsId = null) {
+    public function getGoodsDetails(int $goodsId = null, int $id = null) {
         $param['id'] = $id;
         $param['goodsId'] = $goodsId;
         $param['version'] = 'v1.2.3';

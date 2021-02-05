@@ -177,8 +177,12 @@ class BaseClient
             $this->registerHttpMiddlewares();
         }
         $response = $this->performRequest($url, $method, $options);
-        //$this->app->events->dispatch(new Events\HttpResponseCreated($response));
-        return $returnRaw ? $response : $this->castResponseToType($response, $this->app->config->get('response_type'));
+        $response = $returnRaw ? $response : $this->castResponseToType($response, $this->app->config->get('response_type'));
+
+        if(method_exists($this->app, 'response')) {
+            $response = $this->app->response($response);
+        }
+        return $response;
     }
 
     /**
@@ -205,9 +209,19 @@ class BaseClient
         $this->pushMiddleware($this->retryMiddleware(), 'retry');
         // access token
         $this->pushMiddleware($this->accessTokenMiddleware(), 'access_token');
-        //$this->pushMiddleware($this->signatureMiddleware(), 'sign');
         // log
-        $this->pushMiddleware($this->logMiddleware(), 'log');
+        $this->pushMiddleware($this->logMiddleware(), 'response');
+
+        //$this->pushMiddleware($this->responseMiddleware());
+    }
+
+    protected function responseMiddleware() {
+        return Middleware::mapResponse(function (ResponseInterface $response) {
+            if(method_exists($this->app, 'response')) {
+                return $this->app->response($response);
+            }
+            return $response->withHeader('X-Foo', 'bar');
+        });
     }
 
     /**
@@ -226,14 +240,6 @@ class BaseClient
                 return $handler($request, $options);
             };
         };
-    }
-
-
-    /**
-     * 生成签名
-     */
-    protected function signatureMiddleware() {
-        return $this->app->getSignature();
     }
 
     /**
@@ -265,9 +271,7 @@ class BaseClient
                 if ($retries < $this->app->config->get('http.max_retries', 1) && $response && $body = $response->getBody()) {
                     // Retry on server errors
                     $response = json_decode($body, true);
-
                     if (!empty($response['errcode']) && in_array(abs($response['errcode']), [40001, 40014, 42001], true)) {
-                        $this->accessToken->refresh();
                         $this->app['logger']->debug('Retrying with refreshed access token.');
 
                         return true;

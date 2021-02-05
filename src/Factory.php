@@ -1,27 +1,13 @@
 <?php
-
-/*
- * This file is part of the overtrue/wechat.
- *
- * (c) overtrue <i@overtrue.me>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 namespace EasyTBK;
 
 /**
  * Class Factory.
  *
- * @method static \EasyWeChat\Payment\Application            payment(array $config)
- * @method static \EasyWeChat\MiniProgram\Application        miniProgram(array $config)
- * @method static \EasyWeChat\OpenPlatform\Application       openPlatform(array $config)
- * @method static \EasyWeChat\OfficialAccount\Application    officialAccount(array $config)
- * @method static \EasyWeChat\BasicService\Application       basicService(array $config)
- * @method static \EasyWeChat\Work\Application               work(array $config)
- * @method static \EasyWeChat\OpenWork\Application           openWork(array $config)
- * @method static \EasyWeChat\MicroMerchant\Application      microMerchant(array $config)
+ * @method static \EasyTBK\Dataoke\Application      dataoke(array $config)
+ * @method static \EasyTBK\Jingdong\Application     jingdong(array $config)
+ * @method static \EasyTBK\Pinduoduo\Application    pinduoduo(array $config)
+ * @method static \EasyTBK\Suning\Application       suning(array $config)
  */
 class Factory
 {
@@ -29,7 +15,7 @@ class Factory
      * @param string $name
      * @param array  $config
      *
-     * @return \EasyWeChat\Kernel\ServiceContainer
+     * @return \EasyTBK\Kernel\ServiceContainer
      */
     public static function make($name, array $config)
     {
